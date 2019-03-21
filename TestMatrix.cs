@@ -1,14 +1,8 @@
 using System;
 using Xunit;
 
-public class Test
+public class TestMatrix
 {
-	[Fact]
-	public void test1()
-	{
-		Assert.Equal(true, true);
-	}
-
 	[Fact]
 	public void AddMatrix1()
 	{
@@ -109,7 +103,7 @@ public class Test
 		}
 	}
 
-		[Fact]
+	[Fact]
 	public void MultiplyMatrix2()
 	{
 		var test1 = new int[]
@@ -133,7 +127,6 @@ public class Test
 		var matrix2 = new Matrix(2, 2, test2);
 		var matrix3 = new Matrix(2, 1, test3);
 		
-		var temp = matrix1 * matrix2 ;
 		var result = matrix1 * matrix2 * matrix3;
 
 		var expectedResult = new int[]

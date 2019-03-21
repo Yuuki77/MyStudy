@@ -36,9 +36,7 @@ public class Matrix
 		this.column = column;
 		this.grid = grid;
 	}
-
-	// Row 行
-	// column　列
+	
 	public int this[int row, int column]
 	{
 		get

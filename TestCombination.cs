@@ -8,12 +8,17 @@ public class TestCombination
 	[Fact]
 	public void test1()
 	{
-		var set = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
-		var r = 3;
+		var count = 50;
+		var set = new int[count];
+		for(var i = 0; i < count; i++) {
+			set[i] = i;
+		}
+		var r = 20;
 
 		var combintionManager = new Combination(set, r);
 		var result = combintionManager.Results;
-		Assert.Equal(result.Count, 120);
+		Console.WriteLine("test1" + combintionManager.count);
+		// Assert.Equal(result.Count, 120);
 	}
 
 	[Fact]
@@ -32,20 +37,22 @@ public class TestCombination
 
 		var combintionManager = new Combination(set, r);
 		var results = combintionManager.Results;
+		Console.WriteLine(combintionManager.count);
 		Assert.Equal(results.Count, 6);
 
 		foreach (var expectedResult in expectedResults)
 		{
-			
+
 			bool isExisted = false;
 			foreach (var result in results)
 			{
 
-				if (result.All(expectedResult.Contains)) {
+				if (result.All(expectedResult.Contains))
+				{
 					isExisted = true;
 				}
 			}
-			
+
 			Assert.Equal(isExisted, true);
 		}
 	}

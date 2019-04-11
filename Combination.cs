@@ -4,6 +4,7 @@ using System.Linq;
 
 public class Combination
 {
+	public int count;
 	public List<List<int>> Results
 	{
 		get
@@ -42,8 +43,10 @@ public class Combination
 		for (var i = 0; i < inputs.Length; i++)
 		{
 			var copy = new List<int>(current);
+			count++;
 			if (!copy.Contains(inputs[i]))
 			{
+				
 				copy.Add(inputs[i]);
 				Solve(index + 1, copy);
 			}

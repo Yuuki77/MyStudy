@@ -8,16 +8,16 @@ public class TestCombination
 	[Fact]
 	public void test1()
 	{
-		var count = 50;
+		var count = 3;
 		var set = new int[count];
 		for(var i = 0; i < count; i++) {
 			set[i] = i;
 		}
-		var r = 20;
+		var r = 2;
 
 		var combintionManager = new Combination(set, r);
 		var result = combintionManager.Results;
-		Console.WriteLine("test1" + combintionManager.count);
+		// Console.WriteLine("test1" + combintionManager.count);
 		// Assert.Equal(result.Count, 120);
 	}
 

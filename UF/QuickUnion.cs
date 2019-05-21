@@ -30,8 +30,6 @@ public class QuickUnion : IUnionFind
 			p = ids[p];
 		}
 
-		Console.WriteLine("p" + p);
-
 		return p;
 	}
 

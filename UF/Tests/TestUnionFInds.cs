@@ -74,7 +74,7 @@ public class TestUnionFinds
 		}
 
 		Assert.Equal(uf.Connected(3, 4), true);
-		Assert.Equal(uf.Connected(9, 0), true);
+		Assert.Equal(uf.Connected(9, 0), false);
 	}
 
 }

@@ -8,49 +8,144 @@ namespace lineAralgebra
 	{
 		static void Main(string[] args)
 		{
-			var inputs = new List<int> { 1, 1, 1, 2, 2, 3, 4, 5, 5 };
+			var input = Console.ReadLine().Split().Select(int.Parse).ToArray();
+			var N = input[0];
+			var M = input[1];
 
-			bool ok = Solve(inputs).Sum() == 0;
+			var A = new int[N];
+			var B = new int[N];
 
-			if (ok)
+			for (int i = 0; i < M; i++)
 			{
-				Console.WriteLine("Yes");
+				input = Console.ReadLine().Split().Select(int.Parse).ToArray();
+				A[i] = input[0] - 1;
+				B[i] = input[1] - 1;
+			}
+
+			var ans = 0;
+
+			for (var i = 0; i < M; i++)
+			{
+				var uf = new UnionFind(N);
+				for (var j = 0; j < M; j++)
+				{
+                	if (i == j) continue;
+					{
+						uf.Unite(A[j], B[j]);
+
+						if (uf.count == 1) break; 	
+					}
+				}
+				if (uf.count != 1) ans++;
+			}
+
+			Console.WriteLine(ans);
+		}
+
+	}
+
+	 class UnionFind {
+        int[] dat;
+        public UnionFind() { }
+        public UnionFind(int N) { Init(N); }
+		public int count = 0;
+        public void Init(int n) { dat = new int[n + 1]; for (int i = 0; i <= n; ++i) dat[i] = -1; count = n;}
+        public void Unite(int x, int y) {
+            x = Root(x); y = Root(y); if (x == y) return;
+            if (dat[y] < dat[x]) swap(ref x, ref y); dat[x] += dat[y]; dat[y] = x;
+			count--;
+        }
+        public bool Find(int x, int y) { return Root(x) == Root(y); }
+        public int Root(int x) { return dat[x] < 0 ? x : dat[x] = Root(dat[x]); }
+        public int Size(int x) { return -dat[Root(x)]; }
+        void swap(ref int a, ref int b) { int tmp = b; b = a; a = tmp; }
+	 }
+
+	public class uf
+	{
+		private int[] ids;
+		private int[] size;
+		private int count;
+
+		public uf(int n)
+		{
+			this.ids = new int[n];
+			this.size = new int[n];
+
+			count = n;
+			for (int i = 0; i < ids.Length; i++)
+			{
+				ids[i] = i;
+				size[i] = 1;
+			}
+		}
+
+		public bool Connected(int p, int q)
+		{
+			int pRoot = Find(p);
+			int qRoot = Find(q);
+
+			return pRoot == qRoot;
+		}
+
+		public int Count()
+		{
+			return count;
+		}
+
+		// public int Find(int p)
+		// {
+
+		// 	while (ids[p] != p)
+		// 	{
+		// 		ids[p] = ids[ids[p]];
+		// 		p = ids[p];
+		// 	}
+
+		// 	return p;
+		// }
+
+		public int Find(int p) {
+			if (ids[p] == p) return p;
+			else {
+				return ids[p] = Find(ids[p]);
+			}
+		}
+
+		public void Union(int q, int p)
+		{
+			int rootQ = Find(q);
+			int rootP = Find(p);
+
+			if (rootP == rootQ) return;
+
+			if (size[rootP] < size[rootQ])
+			{
+				ids[rootP] = rootQ;
+				size[rootQ] += size[rootP];
 			}
 			else
 			{
-				Console.WriteLine("No");
+				ids[rootQ] = rootP;
+				size[rootP] += size[rootQ];
 			}
-
-
+			count--;
 		}
 
-		private static List<int> Solve(List<int> inputs)
-		{
+		// public int Try(int q, int p) {
+		// 	int rootQ = Find(q);
+		// 	int rootP = Find(p);
 
-			if (inputs.Sum() == 0 || inputs.Sum() % 2 != 0)
-			{
-				return inputs;
-			}
+		// 	if (rootP == rootQ) return -1;
 
-			for (int i = 0; i < inputs.Count; i++)
-			{
-				if (i >= (inputs.Count - 1 - inputs[inputs.Count - 1]))
-				{
-					inputs[i]--;
-				}
-			}
+		// 	var tempSize = new int[size.Length];
+		// 	var tempIds = new int[ids.Length];
 
-			inputs.Sort();
-			inputs.RemoveAt(inputs.Count - 1);
+		// 	Array.Copy(size, tempSize, size.Length);
+		// 	Array.Copy(ids, tempIds, ids.Length);
 
-			foreach (var item in inputs)
-			{
-				Console.Write(item);
-			}
-			Console.WriteLine("");
-			var deepCopyList = new List<int>(inputs);
+		// 	retur	
+		// }
 
-			return Solve(inputs);
-		}
 	}
 }

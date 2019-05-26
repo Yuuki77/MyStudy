@@ -59,5 +59,22 @@ public class WeightedQuickUnion : IUnionFind
 			ids[rootQ] = rootP;
 			size[rootP] += size[rootQ];
 		}
+		count--;
 	}
+
+	// public int Try(int q, int p) {
+	// 	int rootQ = Find(q);
+	// 	int rootP = Find(p);
+
+	// 	if (rootP == rootQ) return -1;
+
+	// 	var tempSize = new int[size.Length];
+	// 	var tempIds = new int[ids.Length];
+
+	// 	Array.Copy(size, tempSize, size.Length);
+	// 	Array.Copy(ids, tempIds, ids.Length);
+
+	// 	retur	
+	// }
+
 }

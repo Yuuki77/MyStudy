@@ -1,8 +1,25 @@
-![](Image/2019-05-12-00-44-56.png)
+<!-- ![](Image/2019-05-12-00-44-56.png) -->
+
+[元リンク](http://faculty.washington.edu/pisan/cpp/readings/McDowell_ch6_Big_O.pdf)
 
 
-## Amortized Time
+## Amortized Time　（ならし解析）
 
+
+![](Image/2019-05-26-12-55-11.png)
+199 page
+http://www.albertstam.com/Algorithms.pdf 
+![](Image/2019-05-26-12-54-20.png)
+![](Image/2019-05-26-12-53-20.png)
+
+一緒に実装してみよう
+
+## 再帰関数
+[Demo](https://youtu.be/Mv9NEXX1VHc?t=291)  
+実際に書いてみよう
+
+
+<!-- 
 ![](Image/![](Image/2019-05-12-00-46-10.png).png)
 
 ## Log n
@@ -51,4 +68,4 @@
  ![](Image/2019-05-12-01-15-41.png)
 
 
- ![](Image/2019-05-12-01-17-33.png)
+ ![](Image/2019-05-12-01-17-33.png) -->

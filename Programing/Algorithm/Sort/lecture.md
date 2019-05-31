@@ -18,4 +18,5 @@ Sort method doesn't depend on the type of object it handles by comparable interf
 * 反対称性
 * 推移性
 * 完全性
+
 ![](Image/2019-05-31-13-47-53.png)

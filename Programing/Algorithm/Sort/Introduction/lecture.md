@@ -20,3 +20,9 @@ Sort method doesn't depend on the type of object it handles by comparable interf
 * 完全性
 
 ![](Image/2019-05-31-13-47-53.png)
+![](Image/2019-06-02-17-16-32.png)
+
+自分が小さければ -1 を返す
+![](Image/2019-06-02-17-19-43.png)
+
+![](Image/2019-06-02-17-21-35.png)

@@ -39,8 +39,13 @@ public class MergeSort
 
 		for(var k = 0; k <= end; k++) {
 			if (j > end) {
-				
-			}
+				a[k] = aux[i++];
+			} else if (i > middle) {
+				a[k] = aux[j++];
+			} else if (aux[i] <= aux[k]) {
+				a[k] = aux[i++];
+			} else {
+				a[k] = aux[k++];
 		}
 	}
 }

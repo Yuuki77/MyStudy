@@ -23,8 +23,6 @@ public class MergeSort
 
 		var middle = start + (end - start) /2 ;
 
-		Console.WriteLine("Start " + start);
-		Console.WriteLine("end" + end);
 		Sort(start, middle,originalArray, aux);
 		Sort(middle + 1, end, originalArray,aux);
 	

@@ -14,7 +14,7 @@
 
 Sort method doesn't depend on the type of object it handles by comparable interface
 
-### Total 
+### Total (全順序)
 * 反対称性
 * 推移性
 * 完全性

@@ -37,7 +37,7 @@ public class TestCombination
 
 		var combintionManager = new Combination(set, r);
 		var results = combintionManager.Results;
-		Console.WriteLine(combintionManager.count);
+		// Console.WriteLine(combintionManager.count);
 		Assert.Equal(results.Count, 6);
 
 		foreach (var expectedResult in expectedResults)

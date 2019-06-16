@@ -12,10 +12,10 @@ public class GraphTest
 		var values = contents.Split(new[] { Environment.NewLine}, StringSplitOptions.None);
 		Console.WriteLine("lines" + values.Length);
 
-		foreach (var item in values)
-		{
-			Console.WriteLine("item " + item);
-		}
+		// foreach (var item in values)
+		// {
+		// 	Console.WriteLine("item " + item);
+		// }
 
 		var vertex = values[0]; 
 		var G = new AdjacentListGraph(int.Parse(vertex));

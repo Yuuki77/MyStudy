@@ -19,11 +19,11 @@ namespace lineAralgebra
 		{
 			if (n <= 1) return 1;
 			
-			Console.WriteLine("n" + n);
+			// Console.WriteLine("n" + n);
 			var a = CalFactorial(n -1);
 			var b = CalFactorial(n -1);
-			Console.WriteLine("a " + a);
-			Console.WriteLine("b " + b);
+			// Console.WriteLine("a " + a);
+			// Console.WriteLine("b " + b);
 			return a + b;
 		}
 	}

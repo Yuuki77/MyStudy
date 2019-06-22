@@ -9,43 +9,29 @@ namespace lineAralgebra
 	{
 		static void Main(string[] args)
 		{
-			Console.WriteLine("Hello World");
-			FileStream fs = new FileStream("Test.txt", FileMode.Create);
-			StreamWriter sw = new StreamWriter(fs);
-			Console.SetOut(sw);
-			// Console.WriteLine("Hello file");
-			// sw.Close();
-			Ack(4, 1);
+			// var array = new int[] { 1, 5, 22, 111 };
+			var array = new int[] { 1, 5, 111, 22 };
+			var sort = new MergeSort();
+			sort.Sort(array);
+			// var target = 111;
+			// var ans = Find(array, target, 0, array.Length);
 		}
 
-		static long count = 0;
-
-		public static int Ack(int m, int n)
+		private static int Find(int[] array, int target, int lo, int hi)
 		{
-			// 2^65,533
-			//uncountable ではないという話
-			// super exponetiory for loop ではできないという話
-			var ans = 0;
-			if (m == 0)
+			if (hi <= lo) return -1;
+
+			var middle = lo + (hi - lo) / 2;
+
+			if (array[middle] == target) return middle;
+			else if (array[middle] > target)
 			{
-				Console.WriteLine("1");
-				ans = n + 1;
-			}
-			else if (n == 0)
-			{
-				Console.WriteLine("2");
-				ans = Ack(m - 1, 1);
+				return Find(array, target, lo, middle);
 			}
 			else
 			{
-				Console.WriteLine("3");
-				ans = Ack(m - 1, Ack(m, n - 1));
+				return Find(array, target, middle + 1, hi);
 			}
-
-			++count;
-			Console.WriteLine("Ack(" + m + "," + n + ") = " + ans);
-			Console.WriteLine("Count: " + count);
-			return ans;
 		}
 	}
 }

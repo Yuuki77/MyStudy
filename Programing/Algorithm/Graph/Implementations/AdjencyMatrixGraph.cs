@@ -25,7 +25,7 @@ public class AdjencyMatrixGraph : IGraph
 		for(var i = 0; i< vertex; i++) {
 
 			if (adj[v, i] != 0) {
-				list.Add(adj[v, i]);
+				list.Add(i);
 			}
 		}
 		

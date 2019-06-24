@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 
 public class AdjacentListGraph : IGraph
@@ -15,7 +14,6 @@ public class AdjacentListGraph : IGraph
 			adj[i] = new List<int>();
 		}
 	}
-
 
 	public void AddEdge(int v, int w)
 	{

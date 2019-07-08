@@ -11,12 +11,12 @@
 * array size と　heap size によって定義される
 
 ```
-Parent (i) return i/2
+Parent(i) return i/2
 Left(i) return 2i
 Right(i) 2i + 1
 ```
 * Binary heap ->　Max HeapとMin Heap
-* ループ不変式
+* ヒープ条件が違うよ
 
 ```
 Max Heap  A[Parent(i)] >= A[i]
@@ -28,7 +28,8 @@ Min Heap A[Parent(i)] <= A[i]
  	* 木の高さがΘ(lgn)になる
 	* 実行時間はO(lg n)
 
-## 6.2 Maintaining the heap property
+## 6.2 ヒープ条件の維持
+Left(i) とRight(i) がMax heapの条件を満たしていると仮定する。
 A[i]　が子供より小さいときに、Max - Heap lify という関数をよぼう  
 Extract Max [Demo](https://visualgo.net/en/heap) 
 実装すること
@@ -38,5 +39,10 @@ Extract Max [Demo](https://visualgo.net/en/heap)
 
 ## 6.3 Building heap
 普通の配列を heap に変換しよう  
+ループ不変式
+i はmaxHeapの根であるあることを仮定する
 [Create Demo](https://visualgo.net/en/heap) 
+
+## 6.4 ヒープソートアルゴリズム
+
 

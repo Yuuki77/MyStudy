@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 public class SelectionSort
 {
@@ -25,4 +27,21 @@ public class SelectionSort
 		array[minIndex] = array[i];
 		array[i] = temp;
 	}
+}
+
+public class Solution {
+    public IList<IList<string>> GroupAnagrams(string[] strs) {
+        var map = new Dictionary<string, IList<string>>();
+        
+        foreach (var str in strs) {
+            var charStr = str.ToCharArray();
+            Array.Sort(charStr);
+            if(!map.ContainsKey(charStr.ToString())) {
+                map[charStr.ToString()] = new List<string>();
+            }
+            map[charStr.ToString()].Add(str);
+        }
+		 IList<IList<string>> a = map.Values.ToList();
+         return a;
+    }
 }

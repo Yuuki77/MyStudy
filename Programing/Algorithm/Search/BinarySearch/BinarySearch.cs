@@ -15,7 +15,7 @@ public class BinarySearch
 
 		var middle = lo + (hi - lo) / 2;
 
-		if (middle == target) return middle;
+		if (array[middle] == target) return middle;
 		else if (array[middle] > target)
 		{
 			return Find(array, target, lo, middle);
@@ -23,6 +23,30 @@ public class BinarySearch
 		else
 		{
 			return Find(array, target, middle + 1, hi);
+		}
+	}
+
+	public int Find2(int[] array, int target)
+	{
+
+		return Find2(array, target, 0, array.Length - 1);
+	}
+
+	private int Find2(int[] array, int target, int lo, int hi)
+	{
+		if (hi < lo) return lo;
+
+		int middle = lo + (hi - lo) / 2;
+
+		if (array[middle] == target) return middle;
+
+		if (array[middle] > target)
+		{
+			return Find2(array, target, lo, middle - 1);
+		}
+		else
+		{
+			return Find2(array, target, middle + 1, hi);
 		}
 	}
 }

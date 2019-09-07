@@ -2,7 +2,7 @@ public class HeapSort
 {
 	public void Sort(int[] array)
 	{
-		for (var i = array.Length - 1 / 2; i > 0; i--)
+		for (var i = (array.Length - 1) / 2; i > 0; i--)
 			Sink(array, i);
 
 		// One by one extract an element from heap 
@@ -40,6 +40,7 @@ public class HeapSort
 
 	void Heapify(int[] arr, int lastIndex, int i)
 	{
+		// max heap dayooo
 		int largest = i; // Initialize largest as root 
 		int l = 2 * i; // left 
 		int r = 2 * i + 1; // right = 2*i + 2 

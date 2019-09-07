@@ -100,4 +100,16 @@ public class SortTest
 			Assert.Equal(array[i] <= array[i + 1], true);
 		}
 	}
+
+	[Fact]
+	public void CountingSortTest()
+	{
+		var array = "example".ToCharArray();
+		var expected = "aeelmpx";
+		int R = 256;
+
+		var sort = new CountingSort();
+		sort.Sort(array, R);
+		Assert.Equal(expected, new string(array));
+	}
 }

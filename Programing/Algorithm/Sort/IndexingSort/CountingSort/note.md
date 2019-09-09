@@ -1,5 +1,5 @@
 # Counting sort
-
+![](Image/2019-09-09-21-38-26.png)
 O(n) stable 値の上限がわかってれば
 
 ## analysis

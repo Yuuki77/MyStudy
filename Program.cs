@@ -61,7 +61,7 @@ namespace lineAralgebra
 				count[i + 1] += count[i];
 			}
 
-			for (var i = sentenses.Length -1 i >= 0; i)
+			for (var i = sentenses.Length -1 ;i >= 0; i--)
 			{
 				var sentense = sentenses[i];
 				temp[count[dictionary[sentense]]++] = sentense;

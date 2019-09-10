@@ -53,7 +53,7 @@ public class SortTest
 		}
 	}
 
-		[Fact]
+	[Fact]
 	public void DemoMergeSort()
 	{
 		var array = new int[] {
@@ -69,7 +69,7 @@ public class SortTest
 		}
 	}
 
-			[Fact]
+	[Fact]
 	public void BubbleSortTest()
 	{
 		var array = new int[] {
@@ -85,7 +85,7 @@ public class SortTest
 		}
 	}
 
-			[Fact]
+	[Fact]
 	public void InsertionSortTest()
 	{
 		var array = new int[] {
@@ -112,4 +112,34 @@ public class SortTest
 		sort.Sort(array, R);
 		Assert.Equal(expected, new string(array));
 	}
+
+	[Fact]
+	public void LSDSort()
+	{
+		var array = new string[] {
+			"bed","bug", "dad", "yes", "zoo",
+			"abc","tom"
+		};
+		var expected = new string[] {
+			"abc", "bed","bug", "dad","tom", "yes", "zoo"
+		};
+		int w = 3;
+
+		var sort = new LSDSort();
+		sort.Sort(array, w);
+
+		for (int i = 0; i < array.Length; i++)
+		{
+			Assert.Equal(expected[i], array[i]);
+		}
+	}
+
+
+	// 	bed bug dad yes zoo
+	// now for tip ilk dim 
+	// tag jot sob nob sky
+	// hut men egg few jay
+	// owl joy rap gig wee
+	// was wad fee tap tar
+	// dug jam all bad yet
 }

@@ -11,6 +11,7 @@
 
 # the difference between attach vs exec
 https://stackoverflow.com/questions/30960686/difference-between-docker-attach-and-docker-exec
+
 docker >= 1.3) If we use docker attach, we can use only one instance of shell.
 So if we want to open new terminal with new instance of container's shell, we just need to run docker exec
 

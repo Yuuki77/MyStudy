@@ -11,20 +11,31 @@ namespace lineAralgebra
 		//   3  6
 		//  /\ /  \
 		//  2 1 12   5
+
+		// [0,   2, 10],
+		//           [3,   5,  0],
+		//           [9,  20,  6],
+		//           [10, 12, 15],
+		//           [10, 10,  8]
 		static void Main(string[] args)
 		{
-			var root = new TreeNode(5);
-			root.right = new TreeNode(6);
-			root.right.right = new TreeNode(5);
-			root.right.left = new TreeNode(12);
+			int[,] array2D = new int[,] { { 0, 2, 10 }, { 3, 5, 0 }, { 9, 20, 6 }, { 10, 12, 15 } };
+			var a = new CalculateDroneDistance();
+			a.Solve(array2D);
 
-			root.left = new TreeNode(3);
-			root.left.left = new TreeNode(2);
-			root.left.right = new TreeNode(1);
-
-			// var path = new SalePath();
-			var sum = new HasSums();
-			System.Console.WriteLine("answer is" + sum.HasPathSum(root, 10));
 		}
 	}
 }
+
+
+	// while(lo <= hi) {
+	//     var middle = lo + (hi - lo) /2;
+
+//     if (arr[middle] == middle) return middle;
+//     if (arr[middle] - middle > 0) {
+//       hi = middle -1;
+//     } else{
+//       lo = middle +1;
+//     }
+//   }
+//   return -1;

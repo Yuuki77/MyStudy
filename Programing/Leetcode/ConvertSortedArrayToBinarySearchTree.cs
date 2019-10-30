@@ -12,11 +12,17 @@ public class ConvertSortedArrayToBinarySearchTree
 		return Solve(nums, 0, nums.Length - 1);
 	}
 
-	public TreeNode Solve(int[] nums, int start, int end)
+	private TreeNode Solve(int[] nums, int start, int end)
 	{
-
-		if (end < start) return null;
+		System.Console.WriteLine();
+		System.Console.WriteLine("start ->" + start);
+		System.Console.WriteLine("end ->" + end);
+		if (end < start) {
+			System.Console.WriteLine(" return is called");
+			return null;
+		} 
 		var middle = start + ((end - start) / 2);
+		System.Console.WriteLine("middle->" + middle);
 
 		var val = nums[middle];
 		var tree = new TreeNode(val);

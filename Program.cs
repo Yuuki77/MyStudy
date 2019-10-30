@@ -1,4 +1,5 @@
-﻿using static ConvertSortedArrayToBinarySearchTree;
+﻿using System;
+using System.Linq;
 
 namespace lineAralgebra
 {
@@ -6,36 +7,36 @@ namespace lineAralgebra
 
 	class Program
 	{
-		// 		5
-		//    / \
-		//   3  6
-		//  /\ /  \
-		//  2 1 12   5
-
-		// [0,   2, 10],
-		//           [3,   5,  0],
-		//           [9,  20,  6],
-		//           [10, 12, 15],
-		//           [10, 10,  8]
 		static void Main(string[] args)
 		{
-			int[,] array2D = new int[,] { { 0, 2, 10 }, { 3, 5, 0 }, { 9, 20, 6 }, { 10, 12, 15 } };
-			var a = new CalculateDroneDistance();
-			a.Solve(array2D);
+			var input = Console.ReadLine().Split().Select(long.Parse).ToArray()[0];
+			
+			var currentX = input;
+			long currentY = 1;
+			long start = input % 2 == 0 ? 2 : 3;
+			for(long i = start; i <= input /2; i+=2) {
+				var a = input /i;
+				// if (a * i > input) 
+				// {
 
+				// }
+				if (input % i == 0) {
+					System.Console.WriteLine("currentX" + i);
+					System.Console.WriteLine("currentY" + a);
+						currentX = i;
+						currentY = a;
+						break;
+					}
+			}
+
+			// System.Console.WriteLine(currentX);
+			// System.Console.WriteLine(currentY);
+			var ans = currentX -1 + currentY -1;
+			// System.Console.WriteLine("ans is ");
+			System.Console.WriteLine(ans);
 		}
+
+		
 	}
 }
-
-
-	// while(lo <= hi) {
-	//     var middle = lo + (hi - lo) /2;
-
-//     if (arr[middle] == middle) return middle;
-//     if (arr[middle] - middle > 0) {
-//       hi = middle -1;
-//     } else{
-//       lo = middle +1;
-//     }
-//   }
-//   return -1;
+//  b = 15

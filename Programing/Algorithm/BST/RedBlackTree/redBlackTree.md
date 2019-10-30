@@ -8,7 +8,7 @@ A 2-node, with one key (and associated value) and two links, a left link to a 2-
 A 3-node, with two keys (and associated values) and three links, a left link to a 2-3 search tree with smaller keys, a middle link to a 2-3 search tree with keys between the node's keys and a right link to a 2-3 search tree with larger keys.
 
 
-* Review 
+* Review   
 ![](Image/2019-10-27-01-12-54.png)
 
 [RANDOM INSERTION](https://youtu.be/vWchQ0Di7yM?list=PLRdD1c6QbAqJn0606RlOR6T3yUqFWKwmX&t=941)
@@ -18,10 +18,10 @@ A 3-node, with two keys (and associated values) and three links, a left link to 
 ![](Image/2019-10-30-09-26-20.png)
 ![](Image/2019-10-30-09-26-47.png)
 
-* TODO 定義を日本で書く
+* TODO 定義を日本で書く  
 ![](Image/2019-10-27-01-14-58.png)
 
-*　挿入　ケース1
+*　挿入　ケース1  
 ![](Image/2019-10-27-01-16-30.png)
 * ケース2
 ![](Image/2019-10-27-01-23-30.png)
@@ -29,38 +29,38 @@ A 3-node, with two keys (and associated values) and three links, a left link to 
 ![](Image/2019-10-27-01-24-40.png)
 ![](Image/2019-10-27-01-25-17.png)
 
-まとめ
+まとめ  
 ![](Image/2019-10-27-01-26-08.png)
 ![](Image/2019-10-27-01-26-21.png)
 
 
-* みんな大好きRed Black tree
+* みんな大好きRed Black tree  
 ![](Image/2019-10-27-01-30-41.png)
 ![](Image/2019-10-27-01-31-28.png)
 ![](Image/2019-10-27-01-32-20.png)
 ![](Image/2019-10-27-01-32-56.png)
 ![](Image/2019-10-27-01-39-53.png)
 
-* 回転２
+* 回転２  
 ![](Image/2019-10-27-01-46-54.png)
 ![](Image/2019-10-27-01-48-40.png)
 
-* 色変換
+* 色変換  
 ![](Image/2019-10-27-01-50-50.png)
 ![](Image/2019-10-27-01-52-16.png)
 
 
-* Insertion case 1
+* Insertion case 1  
 ![](Image/2019-10-27-01-54-39.png)
 ![](Image/2019-10-27-01-55-32.png)
 
-* Insertion case 2
+* Insertion case 2  
 ![](Image/2019-10-27-01-57-15.png)
 ![](Image/2019-10-27-01-58-22.png)
 ![](Image/2019-10-27-01-58-42.png)
  * TODO 削除
 
 
- * 最後のまとめ
+ * 最後のまとめ  
  ![](Image/2019-10-27-02-08-02.png)
  ![](Image/2019-10-27-02-08-20.png)

@@ -10,6 +10,7 @@ public class RedBlackTree
 		x.isRead = h.isRead;
 		h.isRead = true;
 		x.n = h.n;
+
 		//h.n = 1 + size
 		return x;
 	}

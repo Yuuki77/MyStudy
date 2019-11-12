@@ -66,7 +66,6 @@ public class TestUnionFinds
 
 
 		var uf = new WeightedQuickUnion(N);
-
 		foreach (var item in input)
 		{
 			uf.Union(item[0], item[1]);

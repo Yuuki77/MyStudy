@@ -52,6 +52,10 @@ public class RedBlackTree
 		}
 
 		if (IsRead(h.right) && !IsRead(h.left)) h = RotateLeft(h);
+		if (IsRead(h.left) && IsRead(h.left.left)) h = RotateRight(h);
+		if (IsRead(h.left) && IsRead(h.right)) FlipColors(h);
+
+		return h;
 	}
 
 	private void FlipColors(Node h)

@@ -7,33 +7,20 @@ namespace lineAralgebra
 
 	class Program
 	{
+		public class TreeNode {
+			public int val;
+			public TreeNode right;
+			public TreeNode left;
+
+			public TreeNode(int n) {
+				this.val = n;
+			}
+		}
 		static void Main(string[] args)
 		{
-			var input = Console.ReadLine().Split().Select(long.Parse).ToArray()[0];
-			
-			var currentX = input;
-			long currentY = 1;
-			long start = input % 2 == 0 ? 2 : 3;
-			for(long i = start; i <= input /2; i+=2) {
-				var a = input /i;
-				// if (a * i > input) 
-				// {
-
-				// }
-				if (input % i == 0) {
-					System.Console.WriteLine("currentX" + i);
-					System.Console.WriteLine("currentY" + a);
-						currentX = i;
-						currentY = a;
-						break;
-					}
-			}
-
-			// System.Console.WriteLine(currentX);
-			// System.Console.WriteLine(currentY);
-			var ans = currentX -1 + currentY -1;
-			// System.Console.WriteLine("ans is ");
-			System.Console.WriteLine(ans);
+			var root = new TreeNode(1);
+			root.right = new TreeNode(2);
+			root.left = new TreeNode(1);
 		}
 
 		

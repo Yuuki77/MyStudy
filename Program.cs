@@ -7,23 +7,19 @@ namespace lineAralgebra
 
 	class Program
 	{
-		public class TreeNode {
-			public int val;
-			public TreeNode right;
-			public TreeNode left;
-
-			public TreeNode(int n) {
-				this.val = n;
-			}
-		}
 		static void Main(string[] args)
 		{
-			var root = new TreeNode(1);
-			root.right = new TreeNode(2);
-			root.left = new TreeNode(1);
-		}
+			var input = new int[11];
+			for(var i = 0; i <= 10; i++) {
+				input[i] = i;
+			}
 
-		
+			var bst = new RedBlackTreeDemo();
+
+			foreach(var i in input) {
+				bst.Put(i, i);
+			}
+		}		
 	}
 }
 //  b = 15

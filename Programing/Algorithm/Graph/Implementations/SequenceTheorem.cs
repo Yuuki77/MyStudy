@@ -45,7 +45,6 @@ namespace lineAralgebra
 			{
 				Console.Write(item);
 			}
-			Console.WriteLine("");
 			var deepCopyList = new List<int>(inputs);
 
 			return Solve(inputs);

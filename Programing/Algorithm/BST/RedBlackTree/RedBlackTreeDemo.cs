@@ -57,7 +57,6 @@ public class RedBlackTreeDemo
 	{
 		if (node == null) return new TreeNode(key, value);
 
-		System.Console.WriteLine("current" + node);
 		if (key < node.key)
 		{
 			node.left = Put(node.left, key, value);

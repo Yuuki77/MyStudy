@@ -19,11 +19,9 @@ namespace lineAralgebra
 	{
 		public static void Main(String[] args)
 		{
-			var n = 8;
-			var binary = new Binary();
-			binary.Print(n);
-			System.Console.WriteLine();
-			binary.Print2(n);
+			var prime = new Factors();
+			long x = 3757208;
+			prime.Solve(x);
 		}
 	}
 }

@@ -2,7 +2,6 @@ using System;
 
 public class MergeSort
 {
-	public int[] array;
 
 	public MergeSort()
 	{
@@ -11,50 +10,46 @@ public class MergeSort
 
 	public void Sort(int[] array)
 	{
-		this.array = array;
-		var newArray = new int[this.array.Length];
-		Sort(0, newArray.Length - 1, array, newArray);
+		var aux = new int[array.Length];
+		Sort(0, array.Length - 1, array, aux);
 	}
 
 	public void Sort(int start, int end, int[] originalArray, int[] aux)
 	{
-
 		if (end <= start) return;
-
 		var middle = start + (end - start) / 2;
-
 		Sort(start, middle, originalArray, aux);
 		Sort(middle + 1, end, originalArray, aux);
-
 		Merge(start, middle, end, originalArray, aux);
 	}
 
 	private void Merge(int start, int middle, int end, int[] originalArray, int[] aux)
 	{
-		for (var h = start; h <= end; h++)
+		for (var i = start; i <= end; i++)
 		{
-			aux[h] = originalArray[h];
+			aux[i] = originalArray[i];
 		}
 
-		int i = start, j = middle + 1;
+		var j = start;
+		var k = middle + 1;
 
-		for (var k = start; k <= end; k++)
+		for (var i = start; i <= end; i++)
 		{
-			if (j > end)
+			if (j > middle)
 			{
-				originalArray[k] = aux[i++];
+				originalArray[i] = aux[k++];
 			}
-			else if (i > middle)
+			else if (k > end)
 			{
-				originalArray[k] = aux[j++];
+				originalArray[i] = aux[j++];
 			}
-			else if (aux[i] < aux[j])
+			else if (aux[j] < aux[k])
 			{
-				originalArray[k] = aux[i++];
+				originalArray[i] = aux[j++];
 			}
 			else
 			{
-				originalArray[k] = aux[j++];
+				originalArray[i] = aux[k++];
 			}
 		}
 	}

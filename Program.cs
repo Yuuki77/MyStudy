@@ -6,9 +6,8 @@ class Program
 {
 	static void Main(string[] args)
 	{
-		var n = 100;
-		var coupon = new CouponCollectorSimulator(n);
-		coupon.Solve();
+		var bitOperation = new BitOperation();
+		bitOperation.Solve(5);
 	}
 
 }

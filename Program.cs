@@ -6,8 +6,8 @@ class Program
 {
 	static void Main(string[] args)
 	{
-		var bitOperation = new BitOperation();
-		bitOperation.Solve(5);
-	}
+		var test = new Eratosthenes();
+		test.Solve(30);
 
+	}
 }

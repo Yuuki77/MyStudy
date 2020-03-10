@@ -6,8 +6,7 @@ class Program
 {
 	static void Main(string[] args)
 	{
-		var test = new Eratosthenes();
-		test.Solve(30);
-
+		var solve = new Quadric();
+		solve.Solve(-3.0f, 2.0f);
 	}
 }

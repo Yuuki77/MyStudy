@@ -6,7 +6,7 @@ class Program
 {
 	static void Main(string[] args)
 	{
-		var solve = new Quadric();
-		solve.Solve(-3.0f, 2.0f);
+		var a = new PowerOfTwo();
+		a.Solve2(10);
 	}
 }

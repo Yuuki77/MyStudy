@@ -10,13 +10,16 @@
 * 最初はナイーブなアプローチを
 
 ## 問題定義
+![](Image/2020-03-29-22-04-10.png)
+[link](https://youtu.be/gfSpPbJWzVs?list=PLRdD1c6QbAqJn0606RlOR6T3yUqFWKwmX&t=157)
 [参照リンク](
-https://algs4.cs.princeton.edu/15uf/)  
+https://algs4.cs.princeton.edu/15uf/)
 ![](Image/入力は整数のペアのシーケンスです。各整数はある型のオブジェクトを表しており、p%20qをpがqに接続されていることを意味するものとして解釈します。.png)
 
+![](Image/2020-03-29-22-01-52.png)
 ## ゴール
 
-数値の組みが同値関係であるかどうか判定する効率的なアルゴリズムを書きたい。
+数値の組みが同値関であるかどうか判定する効率的なアルゴリズムを書きたい。
 
 ## アプリケーション
 
@@ -30,9 +33,9 @@ https://algs4.cs.princeton.edu/15uf/)
 public class UF
 	UF(int n)
 	void union(int p, int q) // qとpが繋がりを追加
-	int find(int p) 
+	int find(int p)
 	boolean connected(int p, int q) pとqが同値関係か判定するよ
-	int count() 
+	int count()
 ```
 
 ## その１　Quick-Find
@@ -40,6 +43,7 @@ public class UF
 * id[p] id[q] が同じかどうかみる
 * union するときは　同じやつをすべて変える
 
+![](Image/2020-03-29-22-11-57.png)
 ![](Image/2019-05-16-00-36-10.png)
 
 [demo](https://www.youtube.com/watch?v=4gEaaTRz1h8)
@@ -50,8 +54,6 @@ public class UF
 
 ![](Image/2019-05-18-18-30-32.png)
 
-余力があれば。僕にはよくわからない証明
-![](Image/2019-05-18-19-13-41.png)
 
 ## その2　Union-Find
 
@@ -61,8 +63,9 @@ public class UF
 ![](Image/2019-05-18-18-34-39.png)
 
 [demo](https://youtu.be/BcRLmCS8pfw?list=PLaLOVNqqD-2Hz-wATEaLxBGsZcdcDzMBw&t=179)
-
+親の参照だけ変えれば良い
 ![](Image/2019-05-18-18-44-06.png)
+
 
 ## その3 Weighted-Union
 
@@ -72,14 +75,14 @@ public class UF
 ![](Image/2019-05-18-18-49-39.png)
 
 ![](Image/2019-05-18-18-51-31.png)
+![](Image/2020-03-29-22-34-27.png)
 ![](Image/2019-05-18-18-52-56.png)
-
-* 余力があれば証明  
+* 余力があれば証明
 ![](Image/2019-05-18-19-16-26.png)
 ![](Image/2019-05-18-19-15-26.png)
-![](Image/2019-05-18-19-17-59.png)  
+![](Image/2019-05-18-19-17-59.png)
 
-* 改善 その2  
+* 改善 その2
 ![](Image/2019-05-18-19-02-57.png)
 ![](Image/2019-05-18-19-08-53.png)
 

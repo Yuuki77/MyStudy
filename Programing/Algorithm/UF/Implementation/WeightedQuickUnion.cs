@@ -37,7 +37,7 @@ public class WeightedQuickUnion : IUnionFind
 
 		while (ids[p] != p)
 		{
-			ids[p] = ids[ids[p]];
+			// ids[p] = ids[ids[p]];
 			p = ids[p];
 		}
 
@@ -50,30 +50,19 @@ public class WeightedQuickUnion : IUnionFind
 		int rootP = Find(p);
 
 		if (rootP == rootQ) return;
-		
-		if (size[rootP] < size[rootQ]) {
+
+		// make smaller root to point to larget one
+		if (size[rootP] < size[rootQ])
+		{
 			ids[rootP] = rootQ;
 			size[rootQ] += size[rootP];
-		} else {
+		}
+		else
+		{
 			ids[rootQ] = rootP;
 			size[rootP] += size[rootQ];
 		}
+
 		count--;
 	}
-
-	// public int Try(int q, int p) {
-	// 	int rootQ = Find(q);
-	// 	int rootP = Find(p);
-
-	// 	if (rootP == rootQ) return -1;
-
-	// 	var tempSize = new int[size.Length];
-	// 	var tempIds = new int[ids.Length];
-
-	// 	Array.Copy(size, tempSize, size.Length);
-	// 	Array.Copy(ids, tempIds, ids.Length);
-
-	// 	retur	
-	// }
-
 }

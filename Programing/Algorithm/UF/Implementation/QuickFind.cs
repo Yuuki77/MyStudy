@@ -2,20 +2,21 @@ using System;
 
 public class QuickFind : IUnionFind
 {
-	private int[] ids;
-	private int count;
-	public QuickFind(int N)
+	public int[] id;
+	public int count;
+
+	public QuickFind(int n)
 	{
-		ids = new int[N];
-		for (int i = 0; i < N; i++)
+		id = new int[n];
+		for (var i = 0; i < n; i++)
 		{
-			ids[i] = i;
+			id[i] = i;
 		}
-		count = N;
 	}
+
 	public bool Connected(int p, int q)
 	{
-		return ids[p] == ids[q];
+		return id[p] == id[q];
 	}
 
 	public int Count()
@@ -25,24 +26,27 @@ public class QuickFind : IUnionFind
 
 	public int Find(int p)
 	{
-		return ids[p];
+		return id[p];
 	}
 
 	public void Union(int q, int p)
 	{
-		int pRoot = Find(p);
-		int qRoot = Find(q);
 
-		if (pRoot == qRoot) {
-			return;
-		} 
+		var pId = Find(p);
+		var qId = Find(q);
 
-		for (int i = 0; i < ids.Length; i++)
+		if (pId == qId) return;
+
+		// O(N)
+		// if id[i] is in the same set as qId and then update to pId
+		for (var i = 0; i < id.Length; i++)
 		{
-			if (ids[i] == pRoot) {
-				ids[i] = qRoot;
+			if (qId == id[i])
+			{
+				id[i] = pId;
 			}
 		}
+
 		count--;
 	}
 }

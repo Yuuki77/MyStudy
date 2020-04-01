@@ -1,16 +1,19 @@
 using System;
 
+// Forest representation represent each set as tree and compare the only root
+// in order to check if these are same set
 public class QuickUnion : IUnionFind
 {
 	private int[] ids;
 	private int count;
 
-	public QuickUnion(int n) {
+	public QuickUnion(int n)
+	{
 		this.ids = new int[n];
 		count = n;
 		for (int i = 0; i < ids.Length; i++)
 		{
-			ids[i] = i;	
+			ids[i] = i;
 		}
 	}
 
@@ -24,9 +27,11 @@ public class QuickUnion : IUnionFind
 		return count;
 	}
 
+	// O(N)　we will consider how to improver the performance of find algorithm
 	public int Find(int p)
 	{
-		while(ids[p] != p) {
+		while (ids[p] != p)
+		{
 			p = ids[p];
 		}
 
@@ -38,7 +43,7 @@ public class QuickUnion : IUnionFind
 		var qRoot = Find(q);
 		var pRoot = Find(p);
 
-		if(qRoot == pRoot) return;
+		if (qRoot == pRoot) return;
 
 		ids[qRoot] = pRoot;
 	}

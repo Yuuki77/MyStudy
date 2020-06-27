@@ -39,7 +39,6 @@ public class TestUnionFinds
 
 		var N = 10;
 
-
 		var uf = new QuickUnion(N);
 
 		foreach (var item in input)

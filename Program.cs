@@ -6,32 +6,8 @@ class Program
 {
 	static void Main(string[] args)
 	{
-		var N = long.Parse(Console.ReadLine());
+		var input = Console.ReadLine().Split().Select(decimal.Parse).ToArray();
 
-		var ans = 1 << 29;
-		for (long i = 1; i < N / 2; i++)
-		{
-			if (N % i == 0)
-			{
-				long b = N / i;
-				var f = Math.Max(Solve(i), Solve(b));
-				ans = Math.Min(ans, f);
-			}
-		}
-
-		System.Console.WriteLine(ans);
-	}
-
-	static int Solve(int n)
-	{
-		int sum = 0;
-
-		while (n > 0)
-		{
-			sum++;
-			n /= 10;
-		}
-
-		return sum;
+		System.Console.WriteLine(Math.Floor(input[0] * input[1]));
 	}
 }

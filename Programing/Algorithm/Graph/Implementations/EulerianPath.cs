@@ -31,12 +31,11 @@ public class EulerianPath
 			{
 				break;
 			}
-
 			for (int i = 0; i < filteredAdjacent.Length; i++)
 			{
 				var nextPos = filteredAdjacent[i];
 				bool[,] tempVisited = (bool[,])visited.Clone();
-
+				System.Console.WriteLine(test);
 				tempVisited[nextPos, currentVertex] = true;
 				tempVisited[currentVertex, nextPos] = true;
 				var uf = new WeightedQuickUnion(graph.Vertex);

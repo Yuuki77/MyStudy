@@ -45,7 +45,6 @@ public class UF
 
 ![](Image/2020-03-29-22-11-57.png)
 ![](Image/2019-05-16-00-36-10.png)
-
 [demo](https://www.youtube.com/watch?v=4gEaaTRz1h8)
 
 一緒に実装してみよう
@@ -85,6 +84,9 @@ public class UF
 * 改善 その2
 ![](Image/2019-05-18-19-02-57.png)
 ![](Image/2019-05-18-19-08-53.png)
+
+![](Image/2020-04-02-00-43-39.png)
+![](Image/2020-04-02-00-45-11.png)
 
 ## まとめ
 

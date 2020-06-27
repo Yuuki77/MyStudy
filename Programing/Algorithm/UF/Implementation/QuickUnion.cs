@@ -6,32 +6,33 @@ public class QuickUnion : IUnionFind
 {
 	private int[] ids;
 	private int count;
-
 	public QuickUnion(int n)
 	{
-		this.ids = new int[n];
-		count = n;
+		ids = new int[n];
 		for (int i = 0; i < ids.Length; i++)
 		{
 			ids[i] = i;
 		}
+		count = n;
 	}
 
 	public bool Connected(int p, int q)
 	{
+		// throw new NotImplementedException();
 		return Find(p) == Find(q);
 	}
 
 	public int Count()
 	{
+		// throw new NotImplementedException();
 		return count;
 	}
 
-	// O(N)　we will consider how to improver the performance of find algorithm
 	public int Find(int p)
 	{
-		while (ids[p] != p)
+		while (p != ids[p])
 		{
+			ids[p] = ids[ids[p]];
 			p = ids[p];
 		}
 
@@ -40,11 +41,13 @@ public class QuickUnion : IUnionFind
 
 	public void Union(int q, int p)
 	{
-		var qRoot = Find(q);
-		var pRoot = Find(p);
+		var pParent = Find(p);
+		var qParent = Find(q);
 
-		if (qRoot == pRoot) return;
+		if (pParent == qParent) return;
 
-		ids[qRoot] = pRoot;
+		ids[pParent] = qParent;
+
+		count--;
 	}
 }

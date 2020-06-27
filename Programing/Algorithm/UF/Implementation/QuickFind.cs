@@ -2,48 +2,50 @@ using System;
 
 public class QuickFind : IUnionFind
 {
-	public int[] id;
-	public int count;
-
+	// Make set
+	private int[] ids;
+	private int count = 0;
 	public QuickFind(int n)
 	{
-		id = new int[n];
+		ids = new int[n];
+		count = n;
 		for (var i = 0; i < n; i++)
 		{
-			id[i] = i;
+			ids[i] = i;
 		}
 	}
 
+
 	public bool Connected(int p, int q)
 	{
-		return id[p] == id[q];
+		// throw new NotImplementedException();
+		return ids[p] == ids[q];
 	}
 
 	public int Count()
 	{
+		// throw new NotImplementedException();
 		return count;
 	}
 
 	public int Find(int p)
 	{
-		return id[p];
+		return ids[p];
 	}
 
 	public void Union(int q, int p)
 	{
+		// throw new NotImplementedException();
+		var pParent = Find(p);
+		var qParent = Find(q);
 
-		var pId = Find(p);
-		var qId = Find(q);
+		if (pParent == qParent) return;
 
-		if (pId == qId) return;
-
-		// O(N)
-		// if id[i] is in the same set as qId and then update to pId
-		for (var i = 0; i < id.Length; i++)
+		for (var i = 0; i < ids.Length; i++)
 		{
-			if (qId == id[i])
+			if (ids[i] == pParent)
 			{
-				id[i] = pId;
+				ids[i] = qParent;
 			}
 		}
 

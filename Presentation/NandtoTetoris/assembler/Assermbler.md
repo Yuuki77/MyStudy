@@ -1,7 +1,5 @@
 ---
-marp: false
-header: "header text"
-footer: "footer text"
+marp: true
 ---
 
 <!-- $theme: gaia -->
@@ -9,9 +7,7 @@ footer: "footer text"
 <!-- page_number: true -->
 <!-- paginate: true -->
 
-# Marp for VS Code スライドサンプル
-
-**_@gonkunkun_**
+# Assembler
 
 ---
 

@@ -6,7 +6,8 @@ public class QuickUnion : IUnionFind
 {
 	private int[] ids;
 	private int count;
-	public QuickUnion(int n)
+
+	public QuickUnion(int nkk)
 	{
 		ids = new int[n];
 		for (int i = 0; i < ids.Length; i++)
@@ -21,13 +22,13 @@ public class QuickUnion : IUnionFind
 		// throw new NotImplementedException();
 		return Find(p) == Find(q);
 	}
-
 	public int Count()
 	{
 		// throw new NotImplementedException();
 		return count;
 	}
 
+	// revealDeclarationAside
 	public int Find(int p)
 	{
 		while (p != ids[p])

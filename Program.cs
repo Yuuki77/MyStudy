@@ -10,4 +10,3 @@ class Program
 
 		System.Console.WriteLine(Math.Floor(input[0] * input[1]));
 	}
-}

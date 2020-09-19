@@ -35,7 +35,7 @@ public class EulerianPath
 			{
 				var nextPos = filteredAdjacent[i];
 				bool[,] tempVisited = (bool[,])visited.Clone();
-				System.Console.WriteLine(test);
+				// System.Console.WriteLine(test);
 				tempVisited[nextPos, currentVertex] = true;
 				tempVisited[currentVertex, nextPos] = true;
 				var uf = new WeightedQuickUnion(graph.Vertex);

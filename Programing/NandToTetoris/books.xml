@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="report.xsl"?>
+<books>
+  <good>
+    <name>test</name>
+    <review>good</review>
+  </good>
+  <good>
+    <name>test1</name>
+    <review>bad</review>
+  </good>
+  <good>
+    <name>test2</name>
+    <review>bad</review>
+  </good>
+  <bad>
+    <name>test3</name>
+    <review>bad</review>
+  </bad>
+  <bad>
+    <name>test4</name>
+    <review>good</review>
+  </bad>
+</books>

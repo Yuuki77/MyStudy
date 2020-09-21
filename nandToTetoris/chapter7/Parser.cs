@@ -14,10 +14,12 @@ namespace Chapter7
 
 		public Parser(string fileName)
 		{
-
 			this.lines = new List<string>();
+			// Console.WriteLine(System.IO.File.ReadAllLines(fileName));
 
-			foreach (var line in System.IO.File.ReadAllLines(fileName))
+			// var lines = System.IO.File.ReadAllLines(fileName);
+
+			foreach (var line in System.IO.File.ReadLines(fileName))
 			{
 				Regex.Replace(line, @"\s+", "");
 				var trimmedLine = line.Trim();
@@ -35,6 +37,8 @@ namespace Chapter7
 
 				lines.Add(trimmedLine);
 			}
+
+
 		}
 
 		public void Advance()
@@ -45,6 +49,7 @@ namespace Chapter7
 			}
 
 			var line = lines[currentLine++];
+			System.Console.WriteLine("current line" + line);
 			var commands = line.Split(' ');
 
 			this.commandType = GetCommandType(commands[0]);
@@ -53,6 +58,10 @@ namespace Chapter7
 			{
 				this.arg1 = commands[1];
 				this.arg2 = int.Parse(commands[2]);
+			}
+			else
+			{
+				this.arg1 = commands[0];
 			}
 		}
 
@@ -71,7 +80,8 @@ namespace Chapter7
 				// 	return CommandType.Add;
 
 				default:
-					throw new Exception("Unexpected command type" + type);
+					return CommandType.C_ARITHMETIC;
+					// throw new Exception("Unexpected command type" + type);
 
 			}
 
@@ -81,7 +91,7 @@ namespace Chapter7
 
 	public enum CommandType
 	{
-		C_ARITHEMEITC,
+		C_ARITHMETIC,
 		C_PUSH,
 		C_POP,
 		C_LABEL,

@@ -36,5 +36,4 @@ public class SymbolTable
 	{
 		return symbols[symbol].ToString();
 	}
-
 }

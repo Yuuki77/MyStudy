@@ -7,7 +7,7 @@ public class QuickUnion : IUnionFind
 	private int[] ids;
 	private int count;
 
-	public QuickUnion(int nkk)
+	public QuickUnion(int n)
 	{
 		ids = new int[n];
 		for (int i = 0; i < ids.Length; i++)

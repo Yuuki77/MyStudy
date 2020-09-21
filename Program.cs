@@ -6,7 +6,9 @@ class Program
 {
 	static void Main(string[] args)
 	{
-		var input = Console.ReadLine().Split().Select(decimal.Parse).ToArray();
-
-		System.Console.WriteLine(Math.Floor(input[0] * input[1]));
+		// var fileName = "nandToTetoris/chapter7/Inputs/SimpleAdd/SimpleAdd.vm";
+		// var fileName = Console.ReadLine();
+		var fileName = "nandToTetoris/chapter7/Inputs/StackTest/StackTest.vm";
+		new Chapter7.Run(fileName);
 	}
+}

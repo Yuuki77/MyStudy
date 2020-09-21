@@ -181,12 +181,6 @@ namespace Chapter7
 			results.Add("D = A");
 			results.Add("@R0");
 			results.Add("M = D");
-			results.Add("@" + next);
-			results.Add("D = A");
-			results.Add("@R0");
-			results.Add("M = D");
-
-
 
 			for (int i = 0; i < stack.Count; i++)
 			{

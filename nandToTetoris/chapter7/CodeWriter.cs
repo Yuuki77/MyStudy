@@ -176,14 +176,19 @@ namespace Chapter7
 
 			// set ram0 = 256
 			var next = baseStack + stack.Count + 1;
-			System.Console.WriteLine("Next statck last is " + next);
+			// System.Console.WriteLine("Next statck last is " + next);
 			results.Add("@" + next);
 			results.Add("D = A");
 			results.Add("@R0");
 			results.Add("M = D");
 
-			for (int i = 0; i < stack.Count; i++)
+			// System.Console.WriteLine("Stack count is " + stack.Count);
+			var stackCount = stack.Count;
+			for (int i = 0; i < stackCount; i++)
 			{
+				// System.Console.WriteLine("Index is" + i);
+				// System.Console.WriteLine("Stack count is " + stack.Count);
+
 				WriteAssemblyForStack(baseStack + stack.Count, stack.Pop());
 			}
 

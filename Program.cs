@@ -8,7 +8,7 @@ class Program
 	{
 		// var fileName = "nandToTetoris/chapter7/Inputs/SimpleAdd/SimpleAdd.vm";
 		// var fileName = Console.ReadLine();
-		var fileName = "nandToTetoris/chapter7/Inputs/StackTest/StackTest.vm";
+		var fileName = "/Users/yukiosaki/Desktop/lineAralgebra/nandToTetoris/chapter7/Inputs/StaticTest/StaticTest.vm";
 		new Chapter7.Run(fileName);
 	}
 }

@@ -8,11 +8,10 @@ namespace Chapter7
 		{
 			var parser = new Parser(fullpath);
 			string path = Path.GetDirectoryName(fullpath);
-			// string path = Path.GetDirectoryName(fi);
 			string fileName = Path.GetFileNameWithoutExtension(fullpath);
 
 			var output_path = path + "/" + fileName + ".asm";
-			var codeWriter = new CodeWriter(output_path);
+			var codeWriter = new CodeWriter(output_path, fileName);
 
 			while (parser.HasMoreCommands())
 			{
@@ -22,23 +21,27 @@ namespace Chapter7
 				var isPush = commandType == Chapter7.CommandType.C_PUSH;
 				var isPop = commandType == Chapter7.CommandType.C_POP;
 
-				System.Console.WriteLine("Command type" + commandType);
+				// System.Console.WriteLine("Command type" + commandType);
 				if (isPush || isPop)
 				{
-					System.Console.WriteLine("*** Pop up is called");
+					// System.Console.WriteLine("*** Pop up is called");
 					string segment = parser.arg1;
 					int index = parser.arg2;
-					codeWriter.WritePushPop(commandType, segment, index);
+					codeWriter.WritePushPop(parser.currentCommand, commandType, segment, index);
 				}
 				else
 				{
-					System.Console.WriteLine(commandType);
-					System.Console.WriteLine("*** Write Athematic");
-					codeWriter.WriteAthematic(parser.arg1);
+					// System.Console.WriteLine(commandType);
+					// System.Console.WriteLine("*** Write Athematic");
+					codeWriter.WriteAthematic(parser.currentCommand, parser.arg1);
 				}
-			}
 
-			codeWriter.WriteResult();
+				codeWriter.Write(parser.currentCommand);
+
+			}
+			codeWriter.WriteResult(parser.currentCommand);
+
+			// codeWriter.WriteResult();
 		}
 	}
 }

@@ -6,6 +6,7 @@ namespace Chapter7
 {
 	public class Parser
 	{
+		public string currentCommand;
 		public CommandType commandType;
 		public string arg1;
 		public int arg2;
@@ -52,9 +53,11 @@ namespace Chapter7
 			System.Console.WriteLine("current line" + line);
 			var commands = line.Split(' ');
 
+			this.currentCommand = line;
+
 			this.commandType = GetCommandType(commands[0]);
 
-			if (this.commandType == CommandType.C_PUSH)
+			if (this.commandType == CommandType.C_PUSH || this.commandType == CommandType.C_POP)
 			{
 				this.arg1 = commands[1];
 				this.arg2 = int.Parse(commands[2]);
@@ -76,8 +79,8 @@ namespace Chapter7
 			{
 				case "push":
 					return CommandType.C_PUSH;
-				// case "add":
-				// 	return CommandType.Add;
+				case "pop":
+					return CommandType.C_POP;
 
 				default:
 					return CommandType.C_ARITHMETIC;

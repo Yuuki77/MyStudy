@@ -6,21 +6,20 @@ namespace Chapter7
 {
 	public class CodeWriter
 	{
-		List<int> argument = new List<int>(new int[100]);
-		List<int> local = new List<int>(new int[100]);
-		List<int> staticStack = new List<int>(new int[100]);
-		List<int> constantStack = new List<int>(new int[100]);
-		List<int> thisStack = new List<int>(new int[100]);
-		List<int> thatStack = new List<int>(new int[100]);
-		List<int> pointerStack = new List<int>(new int[100]);
-		List<int> tempStack = new List<int>(new int[100]);
+		List<int> argumentSegment = new List<int>(new int[100]);
+		List<int> localSegment = new List<int>(new int[100]);
+		List<int> staticSegment = new List<int>(new int[100]);
+		List<int> thisSegment = new List<int>(new int[100]);
+		List<int> thatSegment = new List<int>(new int[100]);
+		List<int> pointerSegment = new List<int>(new int[100]);
+		List<int> tempSegment = new List<int>(new int[100]);
 		// List<int> tempStatick = new List<int>(new int[100]);
 
 		Stack<int> stack = new Stack<int>();
 
 		private string setFileName;
 		private List<string> results = new List<string>();
-		private int baseStack = 256;
+		private int stackPointerAddress = 256;
 		private string outputPath;
 
 		private int lclBasicAddress = 300;
@@ -34,13 +33,11 @@ namespace Chapter7
 
 		private string fileName;
 
-		private int stackPointerAddress
+		private Dictionary<string, string> operations = new Dictionary<string, string>()
 		{
-			get
-			{
-				return this.baseStack + stack.Count;
-			}
-		}
+			{"sub","D = D - M"},
+			{"add","D = D + M"},
+		};
 
 		public CodeWriter(string output, string fileName)
 		{
@@ -53,14 +50,15 @@ namespace Chapter7
 			WriteResultThatSp();
 		}
 
-		public void WriteAthematic(string currentCommand, string operation)
+		public void WriteAthematic(string command, string operation)
 		{
-			results.Add("//" + currentCommand);
+			results.Add("//" + Chapter7.Parser.debugcurrentCommand);
 
-			switch (operation)
+			switch (command)
 			{
 				case "add":
-					ExecuteAddOperation();
+				case "sub":
+					ExecuteAddSubOperation(command);
 					break;
 				case "eq":
 					ExecuteEqOperation();
@@ -83,77 +81,195 @@ namespace Chapter7
 				case "not":
 					ExecuteNotOperation();
 					break;
-				case "sub":
+				case "":
 					ExecuteSubOperation();
 					break;
-				// case "constant":
-				// 	break;
-
-
 				default:
 					throw new Exception("Unexpected " + operation);
-
 			}
+		}
+
+		private void ExecuteAddSubOperation(string add_or_sub_key)
+		{
+			results.Add("@" + --stackPointerAddress);
+			results.Add("D = M");
+			results.Add("@" + --stackPointerAddress);
+			results.Add(operations[add_or_sub_key]);
+
+			results.Add("@" + stackPointerAddress++);
+			results.Add("M = D");
+		}
+
+		public void WriteIf(string operation)
+		{
+			results.Add("//" + Chapter7.Parser.debugcurrentCommand);
+
+			var y = stack.Pop();
+			System.Console.WriteLine("Pop  y is " + y);
+			if (y != 0)
+			{
+				// execute the logic
+				results.Add("@" + y);
+				results.Add("D = A");
+				results.Add("@" + operation);
+				results.Add("D;JGT");
+			}
+		}
+
+		// bug
+		public void WriteLabel(string operation)
+		{
+			results.Add("//" + Chapter7.Parser.debugcurrentCommand);
+			results.Add("(" + operation + ")");
 		}
 
 		private void ExecuteNegOperation()
 		{
-			var y = stack.Pop();
-			PushStack(-1 * y);
+			// var y = stack.Pop();
+			// PushStack(-1 * y);
+			// results.Add("@" + --stackPointerAddress);
+			// results.Add("D = M");
+			// results.Add("@" + --stackPointerAddress);
+			// results.Add("D = -D");
+
+			// results.Add("@" + stackPointerAddress++);
+			// results.Add("M = -D");
+
+			WriteResultStackSp();
 		}
 
 		private void ExecuteSubOperation()
 		{
-			var y = stack.Pop();
-			var x = stack.Pop();
-			// stack.Push(x - y);
-			PushStack(x - y);
+			// var y = stack.Pop();
+			// var x = stack.Pop();
+			// PushStack(x - y);
+
+			results.Add("@" + --stackPointerAddress);
+			results.Add("D = M");
+			results.Add("@" + --stackPointerAddress);
+			results.Add("D = D - M");
+
+			results.Add("@" + stackPointerAddress++);
+			results.Add("M = D");
+			// results.Add("@" + stackPointerAddress++);
+			// results.Add("M = D");
+			WriteResultStackSp();
 		}
 
 		private void ExecuteNotOperation()
 		{
-			var val1 = stack.Pop();
-			PushStack(~val1);
+			// var val1 = stack.Pop();
+			// PushStack(~val1);
+			results.Add("@" + --stackPointerAddress);
+			results.Add("D = M");
+			results.Add("@" + stackPointerAddress++);
+			results.Add("D = -D");
+
+			results.Add("@" + stackPointerAddress++);
+			results.Add("M = D");
 		}
 
 		private void ExecuteAndOperation()
 		{
-			var y = stack.Pop();
-			var x = stack.Pop();
+			// var y = stack.Pop();
+			// var x = stack.Pop();
 
-			PushStack(x & y);
+			// PushStack(x & y);
+			results.Add("@" + --stackPointerAddress);
+			results.Add("D = M");
+			results.Add("@" + --stackPointerAddress);
+			results.Add("D = D & M");
 
+			results.Add("@" + stackPointerAddress++);
+			results.Add("M = D");
 		}
 
 		private void ExecuteOrOperation()
 		{
-			var y = stack.Pop();
-			var x = stack.Pop();
+			// var y = stack.Pop();
+			// var x = stack.Pop();
 
-			PushStack(x | y);
+			// PushStack(x | y);
+			results.Add("@" + --stackPointerAddress);
+			results.Add("D = M");
+			results.Add("@" + --stackPointerAddress);
+			results.Add("D = D | M");
+
+			results.Add("@" + stackPointerAddress++);
+			results.Add("M = D");
+
+			// results.Add("@" + stackPointerAddress++);
+			// results.Add("M = D");
+			WriteResultStackSp();
 		}
 
 		private void ExecuteLtOperation()
 		{
-			var y = stack.Pop();
-			var x = stack.Pop();
+			// var y = stack.Pop();
+			// var x = stack.Pop();
 
-			bool eq = x < y;
-			int ans = eq ? -1 : 0;
-			PushStack(ans);
+			// bool eq = x < y;
+			// int ans = eq ? -1 : 0;
+			// PushStack(ans);
+
+			results.Add("@" + --stackPointerAddress);
+			results.Add("D = M");
+			results.Add("@" + --stackPointerAddress);
+			results.Add("D = D - M");
+
+			// ifを書きたい
+			results.Add("@" + results.Count + 4);
+			results.Add("D;JLT");
+
+			// 0のとき
+			results.Add("@" + stackPointerAddress);
+			results.Add("M = 0");
+
+			results.Add("@" + stackPointerAddress);
+			results.Add("M = -1");
+
+			stackPointerAddress++;
+			// results.Add("@" + stackPointerAddress++);
+			// results.Add("M = D");
+			WriteResultStackSp();
+
+			// PushStack(ans);
 		}
 
 		private void ExecuteGtOperation()
 		{
-			var y = stack.Pop();
-			var x = stack.Pop();
+			// M
+			// var y = stack.Pop();
+			// D
+			// var x = stack.Pop();
 
-			bool eq = x > y;
-			int ans = eq ? -1 : 0;
-			PushStack(ans);
+			// 4 > 5
+			// bool eq = x > y;
+			// int ans = eq ? -1 : 0;
+			// PushStack(ans);
+			results.Add("@" + --stackPointerAddress);
+			results.Add("D = M");
+			results.Add("@" + --stackPointerAddress);
+			results.Add("D = D - M");
+
+			// ifを書きたい
+			results.Add("@" + results.Count + 4);
+			results.Add("D;JGT");
+
+			// 0のとき
+			results.Add("@" + stackPointerAddress);
+			results.Add("M = 0");
+
+			results.Add("@" + stackPointerAddress);
+			results.Add("M = -1");
+
+			stackPointerAddress++;
+			// results.Add("@" + stackPointerAddress++);
+			// results.Add("M = D");
+			WriteResultStackSp();
 		}
 
-		public void PushStack(int ans)
+		private void PushStack(int ans)
 		{
 			WriteAssemblyForStack(stackPointerAddress, ans);
 			stack.Push(ans);
@@ -161,28 +277,57 @@ namespace Chapter7
 
 		private void ExecuteEqOperation()
 		{
-			var y = stack.Pop();
-			var x = stack.Pop();
+			// var y = stack.Pop();
+			// var x = stack.Pop();
 
-			bool eq = y == x;
-			int ans = eq ? -1 : 0;
+			// bool eq = y == x;
+			// int ans = eq ? -1 : 0;
 
-			PushStack(ans);
+			results.Add("@" + --stackPointerAddress);
+			results.Add("D = M");
+			results.Add("@" + --stackPointerAddress);
+			results.Add("D = D - M");
+
+			// // ifを書きたい
+			// results.Add("@" + results.Count + 4);
+			// results.Add("D;JEQ");
+
+			// // 0のとき
+			// results.Add("@" + stackPointerAddress);
+			// results.Add("M = -1");
+
+			// results.Add("@" + stackPointerAddress);
+			// results.Add("M = 0");
+
+			// stackPointerAddress++;
+			// results.Add("@" + stackPointerAddress++);
+			// results.Add("M = D");
+			WriteResultStackSp();
+
+			// PushStack(ans);
 		}
 
 
 		private void ExecuteAddOperation()
 		{
-			var y = stack.Pop();
-			var x = stack.Pop();
+			// var y = stack.Pop();
+			// var x = stack.Pop();
 
-			int val = y + x;
-			PushStack(val);
+			// int val = y + x;
+			results.Add("@" + --stackPointerAddress);
+			results.Add("D = M");
+			results.Add("@" + --stackPointerAddress);
+			results.Add("D = D + M");
+
+			results.Add("@" + stackPointerAddress++);
+			results.Add("M = D");
+
+			WriteResultStackSp();
 		}
 
-		public void WritePushPop(string currentCommand, Chapter7.CommandType commandType, string segment, int index)
+		public void WritePushPop(Chapter7.CommandType commandType, string segment, int index)
 		{
-			results.Add("//" + currentCommand);
+			results.Add("//" + Chapter7.Parser.debugcurrentCommand);
 
 			System.Console.WriteLine(segment);
 			switch (segment)
@@ -211,10 +356,6 @@ namespace Chapter7
 				case "static":
 					PushPopStatic(commandType, index);
 					return;
-				// convert this to assembly
-				// case "local":
-				// 	PushPopLocal(commandType, index);
-				// 	return;
 				default:
 					throw new Exception("unexpected " + segment);
 			}
@@ -224,13 +365,13 @@ namespace Chapter7
 		{
 			if (commandType == CommandType.C_PUSH)
 			{
-				PushStack(staticStack[index]);
+				PushStack(staticSegment[index]);
 			}
 			else
 			{
 				var totalIndex = staticAddress + index;
-				staticStack[index] = stack.Pop();
-				var val = staticStack[index];
+				staticSegment[index] = stack.Pop();
+				var val = staticSegment[index];
 
 				if (val < 0)
 				{
@@ -249,13 +390,13 @@ namespace Chapter7
 		{
 			if (commandType == CommandType.C_PUSH)
 			{
-				PushStack(tempStack[index]);
+				PushStack(tempSegment[index]);
 			}
 			else
 			{
 				var totalIndex = tempAddress + index;
-				tempStack[index] = stack.Pop();
-				WriteAssemblyForStack(totalIndex, tempStack[index]);
+				tempSegment[index] = stack.Pop();
+				WriteAssemblyForStack(totalIndex, tempSegment[index]);
 			}
 		}
 
@@ -263,22 +404,22 @@ namespace Chapter7
 		{
 			if (commandType == CommandType.C_PUSH)
 			{
-				PushStack(pointerStack[index]);
+				PushStack(pointerSegment[index]);
 			}
 			else
 			{
 				var totalIndex = pointerAddress + index;
-				pointerStack[index] = stack.Pop();
+				pointerSegment[index] = stack.Pop();
 				if (index == 0)
 				{
-					thisBasicAddress = pointerStack[index];
+					thisBasicAddress = pointerSegment[index];
 				}
 				else
 				{
-					thatBasicAddress = pointerStack[index];
+					thatBasicAddress = pointerSegment[index];
 				}
 
-				WriteAssemblyForStack(totalIndex, pointerStack[index]);
+				WriteAssemblyForStack(totalIndex, pointerSegment[index]);
 			}
 		}
 
@@ -286,14 +427,14 @@ namespace Chapter7
 		{
 			if (commandType == CommandType.C_PUSH)
 			{
-				PushStack(thatStack[index]);
+				PushStack(thatSegment[index]);
 
 			}
 			else
 			{
 				var totalIndex = thatBasicAddress + index;
-				thatStack[index] = stack.Pop();
-				WriteAssemblyForStack(totalIndex, thatStack[index]);
+				thatSegment[index] = stack.Pop();
+				WriteAssemblyForStack(totalIndex, thatSegment[index]);
 			}
 		}
 
@@ -301,15 +442,14 @@ namespace Chapter7
 		{
 			if (commandType == CommandType.C_PUSH)
 			{
-				PushStack(thisStack[index]);
+				PushStack(thisSegment[index]);
 
 			}
 			else
 			{
 				var totalIndex = thisBasicAddress + index;
-				thisStack[index] = stack.Pop();
-				// thisBasicAddress = thisStack[]
-				WriteAssemblyForStack(totalIndex, thisStack[index]);
+				thisSegment[index] = stack.Pop();
+				WriteAssemblyForStack(totalIndex, thisSegment[index]);
 			}
 		}
 
@@ -317,133 +457,46 @@ namespace Chapter7
 		{
 			if (commandType == CommandType.C_PUSH)
 			{
-
-				// WriteAssemblyForStack(stackPointerAddress, argument[index]);
-				// stack.Push(argument[index]);
-				PushStack(argument[index]);
+				System.Console.WriteLine("push argument" + argumentSegment[index]);
+				PushStack(argumentSegment[index]);
 
 			}
 			else
 			{
 				var totalIndex = agrBasicAddress + index;
-				argument[index] = stack.Pop();
-				WriteAssemblyForStack(totalIndex, argument[index]);
+				argumentSegment[index] = stack.Pop();
+				WriteAssemblyForStack(totalIndex, argumentSegment[index]);
 			}
 		}
+
 
 		private void PushPopLocal(CommandType commandType, int index)
 		{
 			if (commandType == CommandType.C_PUSH)
 			{
-				// WriteAssemblyForStack(stackPointerAddress, local[index]);
-				// stack.Push(local[index]);
-				PushStack(local[index]);
+				// System.Console.WriteLine("Push local" + localSegment[index]);
+				PushStack(localSegment[index]);
 			}
 			else
 			{
+				// System.Console.WriteLine("Pop local");
 				var totalIndex = lclBasicAddress + index;
-				var val = stack.Pop();
-				local[index] = val;
-				WriteAssemblyForStack(totalIndex, local[index]);
+				localSegment[index] = stack.Pop();
+				// System.Console.WriteLine(localSegment[index]);
+				WriteAssemblyForStack(totalIndex, localSegment[index]);
 			}
 		}
 
-		public void Write(string currentCommand)
-		{
-			// results.Add("//" + currentCommand);
-			// results.Add("D = A");
-			// results.Add("@R0");
-			// results.Add("M = D");
+		// public void Write()
+		// {
+		// 	WriteResultStackSp();
+		// }
 
-			WriteResultStackSp();
-			// WriteResultLocalSp();
-			// WriteResultArgumentSp();
-			// WriteResultThisSp();
-			// WriteResultThatSp();
-			// WriteResultSp();
-
-
-			// var stackCount = stack.Count;
-
-			// for (int i = 0; i < stackCount; i++)
-			// {
-			// 	WriteAssemblyForStack(baseStack + stack.Count, stack.Pop());
-			// }
-		}
-
-		public void WriteResult(string currentCommand)
+		public void WriteResult()
 		{
 			string path = Path.GetDirectoryName(this.setFileName);
 			string fileName = Path.GetFileNameWithoutExtension(this.setFileName);
-
-			WriteArgument();
-			WriteLocal();
-			WriteThis();
-			WriteThat();
-			WriteTemp();
-
-			WritePointer();
-			// for (int i = 0; i < stackCount; i++)
-			// {
-			// 	WriteAssemblyForStack(baseStack + stack.Count, stack.Pop());
-			// }
-
-
 			File.WriteAllLines(outputPath, results);
-		}
-
-		private void WriteArgument()
-		{
-			for (int i = 0; i < this.argument.Count; i++)
-			{
-				WriteAssemblyForStack(agrBasicAddress + i, argument[i]);
-			}
-		}
-
-		private void WriteThat()
-		{
-			for (int i = 0; i < this.thatStack.Count; i++)
-			{
-				WriteAssemblyForStack(thatBasicAddress + i, thatStack[i]);
-			}
-		}
-
-		private void WriteTemp()
-		{
-			for (int i = 0; i < this.tempStack.Count; i++)
-			{
-				WriteAssemblyForStack(tempAddress + i, this.tempStack[i]);
-			}
-		}
-
-		private void WritePointer()
-		{
-
-			for (int i = 0; i < this.pointerStack.Count; i++)
-			{
-				WriteAssemblyForStack(pointerAddress + i, this.pointerStack[i]);
-			}
-			// for (int i = 0; i < this.pointerStack.Count; i++)
-			// {
-			// 	WriteAssemblyForStack(pointer + i, thisStack[i]);
-			// }
-		}
-
-
-		private void WriteLocal()
-		{
-			for (int i = 0; i < this.local.Count; i++)
-			{
-				WriteAssemblyForStack(lclBasicAddress + i, this.local[i]);
-			}
-		}
-
-		private void WriteThis()
-		{
-			for (int i = 0; i < this.thisStack.Count; i++)
-			{
-				WriteAssemblyForStack(thisBasicAddress + i, this.thisStack[i]);
-			}
 		}
 
 		private void WriteResultThisSp()
@@ -488,57 +541,42 @@ namespace Chapter7
 
 		private void WriteAssemblyForStack(int index, int val)
 		{
-			//
+
 			// System.Console.WriteLine("index" + index);
 			// System.Console.WriteLine("val" + val);
 
 			// D = A
 			// M = D
-			if (val < 0)
-			{
-				results.Add("@" + (-1 * val));
-				results.Add("D = -A");
-				results.Add("@" + index);
-				results.Add("M = D");
-			}
-			else
-			{
-				results.Add("@" + val);
-				results.Add("D = A");
-				results.Add("@" + index);
-				results.Add("M = D");
-				// convert this to assembly
-			}
-
-			// results.Add("@tmp");
-			// results.Add("M = " + );
-
-			// results.Add("@tmp");
-			// results.Add("@tmp");
-
-			// // D = M
-			// results.Add("@R0");
-			// results.Add("@R0");
-			// results.Add("M = " + index);
+			// if (val < 0)
+			// {
+			// 	results.Add("@" + (-1 * val));
+			// 	results.Add("D = -A");
+			// 	results.Add("@" + index);
+			// 	results.Add("M = D");
+			// }
+			// else
+			// {
+			// 	results.Add("@" + val);
+			// 	results.Add("D = A");
+			// 	results.Add("@" + index);
+			// 	results.Add("M = D");
+			// }
 		}
 
 		private void PushPopConstant(CommandType commandType, int index)
 		{
 			if (commandType == CommandType.C_PUSH)
 			{
-				// WriteAssemblyForStack(stackPointerAddress, index);
-				// stack.Push(index);
-				PushStack(index);
+				results.Add("@" + index);
+				results.Add("D = A");
+				results.Add("@" + this.stackPointerAddress++);
+				results.Add("M = D");
+				// PushStack(index);
 			}
 			else
 			{
 				throw new Exception("Un expected pop stack option");
 			}
-		}
-
-		public bool HasMoreCommands()
-		{
-			return false;
 		}
 	}
 }
